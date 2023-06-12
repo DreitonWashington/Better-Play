@@ -1,6 +1,5 @@
 package com.coralsoft.domain.entity;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 import com.coralsoft.domain.enums.CastMemberType;
@@ -10,17 +9,15 @@ public class CastMember {
 	private Long id;
 	private String name;
 	private CastMemberType type;
-	private LocalDateTime createdAt;
 	
 	public CastMember() {
 	}
 
-	public CastMember(Long id, String name, CastMemberType type, LocalDateTime createdAt) {
+	public CastMember(Long id, String name, CastMemberType type) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.type = type;
-		this.createdAt = createdAt;
 	}
 
 	public Long getId() {
@@ -47,14 +44,6 @@ public class CastMember {
 		this.type = type;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -71,6 +60,5 @@ public class CastMember {
 		CastMember other = (CastMember) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 	
 }

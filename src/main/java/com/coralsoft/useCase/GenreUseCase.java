@@ -58,12 +58,14 @@ public class GenreUseCase implements GenreRepository{
 				genre.setDescription(result.getString("description"));
 				genre.setActive(result.getBoolean("isActive"));
 				
-				Object o = result.getObject("createdAt");
-				LocalDateTime localDateTime = (LocalDateTime) o;
-				Instant i = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
-				
-				genre.setCreatedAt(i);
-				//System.out.println(dtf.format(i));
+				if(result.getObject("createdAt") != null) {
+					Object o = result.getObject("createdAt");
+					LocalDateTime localDateTime = (LocalDateTime) o;
+					Instant i = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+					
+					genre.setCreatedAt(i);
+					//System.out.println(dtf.format(i));					
+				}
 				
 			}else {
 				throw new GenreNotFoundException(id);
@@ -80,8 +82,8 @@ public class GenreUseCase implements GenreRepository{
 		String sql = "insert into genre (name,description,isActive,createdAt) values (?,?,?,?)";
 		
 		try {
-			Connection conn = connection;
-			PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			
 			statement.setString(1, genre.getName());

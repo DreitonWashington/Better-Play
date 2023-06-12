@@ -24,7 +24,7 @@ public class GenreTests {
 	void findAllGenres() throws Exception {
 		List<Genre> genres = repository.findAll();
 		Assertions.assertNotNull(genres);
-		logger.info("Genres: {}",genres.stream().map(x-> x.getName()).collect(Collectors.toList()));
+		logger.info("Genres-> {}",genres.stream().map(x-> x.getName()).collect(Collectors.toList()));
 	}
 	
 	@Test
