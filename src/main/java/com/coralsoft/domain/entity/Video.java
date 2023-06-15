@@ -1,14 +1,14 @@
 package com.coralsoft.domain.entity;
 
-import java.awt.Image;
-import java.time.LocalDateTime;
+
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.print.attribute.standard.Media;
-
 import com.coralsoft.domain.enums.Censure;
+import com.coralsoft.domain.valueObject.Image;
+import com.coralsoft.domain.valueObject.Media;
 
 public class Video {
 	
@@ -17,11 +17,10 @@ public class Video {
 	private String description;
 	private int yearLaunched;
 	private int duration;
-	private boolean opened = false;
 	private int rating;
 	private Censure censure;
 	private boolean published;
-	private LocalDateTime createdAt;
+	private Instant createdAt;
 	private Image thumbFile;
 	private Image thumbHalf;
 	private Image bannerFile;
@@ -36,8 +35,8 @@ public class Video {
 	public Video() {
 	}
 
-	public Video(Long id, String title, String description, int yearLaunched, int duration, boolean opened, int rating,
-			Censure censure, boolean published, LocalDateTime createdAt, Image thumbFile, Image thumbHalf,
+	public Video(Long id, String title, String description, int yearLaunched, int duration, int rating,
+			Censure censure, boolean published, Instant createdAt, Image thumbFile, Image thumbHalf,
 			Image bannerFile, Media trailerFile, Media videoFile) {
 		super();
 		this.id = id;
@@ -45,7 +44,6 @@ public class Video {
 		this.description = description;
 		this.yearLaunched = yearLaunched;
 		this.duration = duration;
-		this.opened = opened;
 		this.rating = rating;
 		this.censure = censure;
 		this.published = published;
@@ -124,17 +122,9 @@ public class Video {
 	public int getDuration() {
 		return duration;
 	}
-
+	
 	public void setDuration(int duration) {
 		this.duration = duration;
-	}
-
-	public boolean isOpened() {
-		return opened;
-	}
-
-	public void setOpened(boolean opened) {
-		this.opened = opened;
 	}
 
 	public int getRating() {
@@ -161,11 +151,11 @@ public class Video {
 		this.published = published;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(Instant createdAt) {
 		this.createdAt = createdAt;
 	}
 
