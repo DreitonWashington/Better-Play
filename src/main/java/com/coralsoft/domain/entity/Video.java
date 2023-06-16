@@ -15,19 +15,19 @@ public class Video {
 	private Long id;
 	private String title;
 	private String description;
+	private Category category_id;
 	private int yearLaunched;
 	private int duration;
 	private int rating;
 	private Censure censure;
 	private boolean published;
-	private Instant createdAt;
+	private Instant createdAt = Instant.now();
 	private Image thumbFile;
 	private Image thumbHalf;
 	private Image bannerFile;
 	private Media trailerFile;
 	private Media videoFile;
 	
-	private List<Category> categoriesId = new ArrayList<>();
 	private List<Genre> genresId = new ArrayList<>();
 	private List<CastMember> castMembersId = new ArrayList<>();
 	private List<Comment> commentsId = new ArrayList<>();
@@ -35,32 +35,24 @@ public class Video {
 	public Video() {
 	}
 
-	public Video(Long id, String title, String description, int yearLaunched, int duration, int rating,
-			Censure censure, boolean published, Instant createdAt, Image thumbFile, Image thumbHalf,
+	public Video(Long id, String title, String description, Category category, int yearLaunched, int duration, int rating,
+			Censure censure, boolean published, Image thumbFile, Image thumbHalf,
 			Image bannerFile, Media trailerFile, Media videoFile) {
-		super();
+
 		this.id = id;
 		this.title = title;
 		this.description = description;
+		this.category_id = category;
 		this.yearLaunched = yearLaunched;
 		this.duration = duration;
 		this.rating = rating;
 		this.censure = censure;
 		this.published = published;
-		this.createdAt = createdAt;
 		this.thumbFile = thumbFile;
 		this.thumbHalf = thumbHalf;
 		this.bannerFile = bannerFile;
 		this.trailerFile = trailerFile;
 		this.videoFile = videoFile;
-	}
-	
-	public void addCategory(Category categoryId) {
-		this.categoriesId.add(categoryId);
-	}
-	
-	public void removeCategory(Category category) {
-		this.categoriesId.remove(category);
 	}
 	
 	public void addGenre(Genre genre) {
@@ -197,6 +189,14 @@ public class Video {
 
 	public void setVideoFile(Media videoFile) {
 		this.videoFile = videoFile;
+	}
+
+	public Category getCategory_id() {
+		return category_id;
+	}
+
+	public void setCategory_id(Category category_id) {
+		this.category_id = category_id;
 	}
 
 	@Override

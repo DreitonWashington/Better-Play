@@ -30,7 +30,7 @@ public class CastMemberTests {
 	@Test
 	void findByIdCastMember() {
 		CastMember castMember = repository.findById(1L);
-		Assertions.assertEquals("Rober Tayson", castMember.getName());
+		Assertions.assertEquals("Robert Denin", castMember.getName());
 		logger.info("ID-> {}, Name-> {}, Type-> {}", castMember.getId(), castMember.getName()
 				, castMember.getType().name());
 	}

@@ -1,6 +1,6 @@
 package com.coralsoft.domain.entity;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Objects;
 
 
@@ -9,12 +9,12 @@ public class Comment {
 	private Long id;
 	private String description;
 	private boolean isActive;
-	private LocalDateTime createdAt;
+	private Instant createdAt;
 	
 	public Comment() {
 	}
 
-	public Comment(Long id, String description, boolean isActive, LocalDateTime createdAt) {
+	public Comment(Long id, String description, boolean isActive, Instant createdAt) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -46,11 +46,11 @@ public class Comment {
 		this.isActive = isActive;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(Instant createdAt) {
 		this.createdAt = createdAt;
 	}
 
