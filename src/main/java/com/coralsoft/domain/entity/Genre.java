@@ -4,13 +4,13 @@ import java.time.Instant;
 import java.util.Objects;
 
 public class Genre {
-	
+
 	private Long id;
 	private String name;
 	private String description;
 	private boolean isActive = true;
 	private Instant createdAt = Instant.now();
-	
+
 	public Genre() {
 	}
 
@@ -22,11 +22,11 @@ public class Genre {
 		this.isActive = isActive;
 		this.createdAt = createdAt;
 	}
-	
+
 	public Genre(String name) {
 		this.name = name;
 	}
-	
+
 
 	public Long getId() {
 		return id;
@@ -77,9 +77,7 @@ public class Genre {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Genre other = (Genre) obj;
 		return Objects.equals(id, other.id);

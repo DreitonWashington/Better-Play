@@ -22,25 +22,25 @@ import com.coralsoft.domain.valueObject.Image;
 import com.coralsoft.domain.valueObject.Media;
 
 public class VideoUseCase implements VideoRepository{
-	
+
 	Connection connection = SingleConnectionDB.getConnection();
 	CategoryRepository categoryRepository = new CategoryUseCase();
 
 	@Override
 	public List<Video> findAll() throws Exception {
-		
+
 		List<Video> listVideos = new ArrayList<>();
 		String sql = "select * from videos";
-		
+
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet result = statement.executeQuery();
-			
+
 			while(result.next()) {
 				Video video = new Video();
 				Image image = new Image();
 				Media media = new Media();
-				
+
 				video.setId(result.getLong("id"));
 				video.setTitle(result.getString("title"));
 				video.setDescription(result.getString("description"));
@@ -49,30 +49,30 @@ public class VideoUseCase implements VideoRepository{
 				video.setRating(result.getInt("rating"));
 				video.setCensure(censura(result.getString("censure")));
 				video.setPublished(result.getBoolean("published"));
-				
+
 				image.setFilePath(result.getString("thumb_file"));
 				video.setThumbFile(image);
-				
+
 				image.setFilePath(result.getString("thumb_half"));
 				video.setThumbHalf(image);
-				
+
 				image.setFilePath(result.getString("banner_file"));
 				video.setBannerFile(image);
-				
+
 				media.setFilePath(result.getString("trailer_file"));
 				video.setTrailerFile(media);
-				
+
 				media.setFilePath(result.getString("video_file"));
 				video.setVideoFile(media);
-				
+
 				Object o = result.getObject("createdAt");
 				LocalDateTime date = (LocalDateTime) o;
 				Instant instant = Instant.from(date.atZone(ZoneId.systemDefault()));
-				
+
 				video.setCreatedAt(instant);
 				listVideos.add(video);
-				
-				
+
+
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -82,48 +82,48 @@ public class VideoUseCase implements VideoRepository{
 
 	@Override
 	public Video findById(Long id) {
-	
+
 		Video video = new Video();
 		Image image = new Image();
 		Media media = new Media();
 		Category category = new Category();
-		
+
 		String sql = "select * from videos where id = ?";
-		
+
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setLong(1, id);
 			ResultSet result = statement.executeQuery();
-			
+
 			if(result.next()) {
 				video.setId(result.getLong("id"));
 				video.setTitle(result.getString("title"));
 				video.setDescription(result.getString("description"));
-				
+
 				category = this.categoryRepository.findById((long) result.getInt("category_id"));
-				
+
 				video.setCategory_id(category);
 				video.setYearLaunched(result.getInt("year_launched"));
 				video.setDuration(result.getInt("duration"));
 				video.setRating(result.getInt("rating"));
 				video.setCensure(censura(result.getString("censure")));
 				video.setPublished(result.getBoolean("published"));
-				
+
 				if(result.getObject("createdAt") != null) {
 					Object o = result.getObject("createdAt");
 					LocalDateTime date = (LocalDateTime) o;
 					Instant instant = Instant.from(date.atZone(ZoneId.systemDefault()));
-					
-					video.setCreatedAt(instant);					
+
+					video.setCreatedAt(instant);
 				}
-				
+
 				image.setFilePath(result.getString("thumb_file"));
 				video.setThumbFile(image);
 				image.setFilePath(result.getString("thumb_half"));
 				video.setThumbHalf(image);
 				image.setFilePath(result.getString("banner_file"));
 				video.setBannerFile(image);
-				
+
 				media.setFilePath(result.getString("trailer_file"));
 				video.setTrailerFile(media);
 				media.setFilePath(result.getString("video_file"));
@@ -131,7 +131,7 @@ public class VideoUseCase implements VideoRepository{
 			}else {
 				throw new VideoNotFoundException(id);
 			}
-			
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -140,11 +140,11 @@ public class VideoUseCase implements VideoRepository{
 
 	@Override
 	public Video save(Video video) {
-		
+
 		String sql = "insert into videos (title, description, category_id, year_launched, duration, rating, censure,"
 				+ "published, createdAt, thumb_file, thumb_half, banner_file,"
 				+ "trailer_file, video_file) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		
+
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, video.getTitle());
@@ -161,11 +161,11 @@ public class VideoUseCase implements VideoRepository{
 			statement.setString(12, video.getBannerFile().getFilePath());
 			statement.setString(13, video.getTrailerFile().getFilePath());
 			statement.setString(14, video.getVideoFile().getFilePath());
-			
-			
+
+
 			statement.executeUpdate();
 			ResultSet result = statement.getGeneratedKeys();
-			
+
 			if(result.next()) {
 				video.setId(result.getLong(1));
 			}
@@ -178,16 +178,16 @@ public class VideoUseCase implements VideoRepository{
 
 	@Override
 	public Video update(Video video) {
-		
+
 		Video videoNow = new Video();
 		String sql = "update videos set title = ?, description = ?, category_id = ?, year_launched = ?, duration = ?, "
 				+ "rating = ?, censure = ?, thumb_file = ?, thumb_half = ?"
 				+ ", banner_file = ?, trailer_file = ?, video_file = ? where id = ?";
-		
+
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			videoNow = this.findById(video.getId());
-			
+
 			if(video.getTitle() != null ) videoNow.setTitle(video.getTitle());
 			if(video.getDescription() != null ) videoNow.setDescription(video.getDescription());
 			if(video.getCategory_id() != null ) videoNow.setCategory_id(video.getCategory_id());
@@ -200,7 +200,7 @@ public class VideoUseCase implements VideoRepository{
 			if(video.getBannerFile() != null) videoNow.setBannerFile(video.getBannerFile());
 			if(video.getTrailerFile() != null) videoNow.setTrailerFile(video.getTrailerFile());
 			if(video.getVideoFile() != null) videoNow.setVideoFile(video.getVideoFile());
-			
+
 			statement.setString(1, videoNow.getTitle());
 			statement.setString(2, videoNow.getDescription());
 			statement.setLong(3, videoNow.getCategory_id().getId());
@@ -214,12 +214,12 @@ public class VideoUseCase implements VideoRepository{
 			statement.setString(11, videoNow.getTrailerFile().getFilePath());
 			statement.setString(12, videoNow.getVideoFile().getFilePath());
 			statement.setLong(13, video.getId());
-			
+
 			statement.executeUpdate();
 			ResultSet result = statement.getGeneratedKeys();
-			
+
 			if(result.next())video = this.findById(result.getLong(1));
-		
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -228,20 +228,20 @@ public class VideoUseCase implements VideoRepository{
 
 	@Override
 	public void delete(Long id) {
-		
+
 		String sql = "delete from videos where id = ?";
-		
+
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setLong(1, id);
-			
+
 			statement.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public Censure censura(String censura) {
 		Censure censure = null;
 		switch(censura) {
@@ -266,7 +266,7 @@ public class VideoUseCase implements VideoRepository{
 		}
 		return censure;
 	}
-	
-	
+
+
 
 }

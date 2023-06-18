@@ -5,11 +5,11 @@ import java.util.Objects;
 import com.coralsoft.domain.enums.CastMemberType;
 
 public class CastMember {
-	
+
 	private Long id;
 	private String name;
 	private CastMemberType type;
-	
+
 	public CastMember() {
 	}
 
@@ -53,12 +53,10 @@ public class CastMember {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		CastMember other = (CastMember) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

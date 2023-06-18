@@ -5,12 +5,12 @@ import java.util.Objects;
 
 
 public class Comment {
-	
+
 	private Long id;
 	private String description;
 	private boolean isActive;
 	private Instant createdAt;
-	
+
 	public Comment() {
 	}
 
@@ -63,12 +63,10 @@ public class Comment {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Comment other = (Comment) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

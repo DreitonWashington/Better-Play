@@ -3,7 +3,7 @@ package com.coralsoft.domain.valueObject;
 public class Image {
 
 	private String filePath;
-	
+
 	public Image() {
 	}
 

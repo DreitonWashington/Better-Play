@@ -11,7 +11,7 @@ import com.coralsoft.domain.valueObject.Image;
 import com.coralsoft.domain.valueObject.Media;
 
 public class Video {
-	
+
 	private Long id;
 	private String title;
 	private String description;
@@ -27,11 +27,11 @@ public class Video {
 	private Image bannerFile;
 	private Media trailerFile;
 	private Media videoFile;
-	
+
 	private List<Genre> genresId = new ArrayList<>();
 	private List<CastMember> castMembersId = new ArrayList<>();
 	private List<Comment> commentsId = new ArrayList<>();
-	
+
 	public Video() {
 	}
 
@@ -54,27 +54,27 @@ public class Video {
 		this.trailerFile = trailerFile;
 		this.videoFile = videoFile;
 	}
-	
+
 	public void addGenre(Genre genre) {
 		this.genresId.add(genre);
 	}
-	
+
 	public void removeGenre(Genre genre) {
 		this.genresId.remove(genre);
 	}
-	
+
 	public void addCastMember(CastMember castMember) {
 		this.castMembersId.add(castMember);
 	}
-	
+
 	public void removeCastMember(CastMember castMember) {
 		this.castMembersId.remove(castMember);
 	}
-	
+
 	public void addComment(Comment comment) {
 		this.commentsId.add(comment);
 	}
-	
+
 	public void removeComment(Comment comment) {
 		this.commentsId.remove(comment);
 	}
@@ -114,7 +114,7 @@ public class Video {
 	public int getDuration() {
 		return duration;
 	}
-	
+
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
@@ -208,13 +208,11 @@ public class Video {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Video other = (Video) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
+
 }

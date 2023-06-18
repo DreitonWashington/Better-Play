@@ -4,13 +4,13 @@ import java.time.Instant;
 import java.util.Objects;
 
 public class Category {
-	
+
 	private Long id;
 	private String name;
 	private String description;
 	private boolean isActive;
 	private Instant createdAt;
-	
+
 	public Category() {
 	}
 
@@ -50,7 +50,7 @@ public class Category {
 	public boolean getIsActive() {
 		return isActive;
 	}
-	
+
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
@@ -72,12 +72,10 @@ public class Category {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Category other = (Category) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

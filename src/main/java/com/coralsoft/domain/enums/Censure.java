@@ -1,7 +1,7 @@
 package com.coralsoft.domain.enums;
 
 public enum Censure {
-	
+
 	L,
 	CENSURA_10,
 	CENSURA_12,

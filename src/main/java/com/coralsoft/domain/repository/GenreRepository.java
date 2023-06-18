@@ -5,7 +5,7 @@ import java.util.List;
 import com.coralsoft.domain.entity.Genre;
 
 public interface GenreRepository {
-	
+
 	public List<Genre> findAll() throws Exception;
 	public Genre findById(Long id);
 	public Genre save(Genre genre);

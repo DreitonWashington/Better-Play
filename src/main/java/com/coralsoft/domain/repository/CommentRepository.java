@@ -5,7 +5,7 @@ import java.util.List;
 import com.coralsoft.domain.entity.Comment;
 
 public interface CommentRepository {
-	
+
 	public List<Comment> findAll() throws Exception;
 	public Comment findById(Long id);
 	public Comment save(Comment comment);

@@ -3,10 +3,10 @@ package com.coralsoft.domain.valueObject;
 import com.coralsoft.domain.enums.MediaStatus;
 
 public class Media {
-	
+
 	private String filePath;
 	private MediaStatus mediaStatus;
-	
+
 	public Media() {
 	}
 
@@ -31,5 +31,5 @@ public class Media {
 	public void setMediaStatus(MediaStatus mediaStatus) {
 		this.mediaStatus = mediaStatus;
 	}
-	
+
 }
