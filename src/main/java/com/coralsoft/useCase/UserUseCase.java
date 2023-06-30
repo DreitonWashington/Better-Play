@@ -17,6 +17,28 @@ import com.coralsoft.domain.repository.UserRepository;
 public class UserUseCase implements UserRepository{
 
 	Connection connection = SingleConnectionDB.getConnection();
+	
+	@Override
+	public boolean authenticate(User user) {
+		
+		String sql = "select * from users where email = ? and password = ?";
+		
+		try {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, user.getEmail());
+			statement.setString(2, user.getPassword());
+			
+			ResultSet result = statement.executeQuery();
+			
+			if(result.next()) {
+				return true;
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	@Override
 	public List<User> findAll() throws Exception {

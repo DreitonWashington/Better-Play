@@ -1,0 +1,100 @@
+body{
+	margin: 0;
+	background-color: #050814;
+	color: #fff;
+	font-size: 62.5%;
+}
+h1.title{
+	width: 104px!important;
+	border-bottom: 2px solid rgb(150,150,150)!important;
+	color: rgb(150,150,150)!important;
+}
+
+.container{
+	display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    flex-direction: row;
+}
+.fix-content{
+	background-color: #0e1732;
+	width: 33.7rem;
+	height: 25rem;
+}
+
+div.single-input{
+	width: 100%;
+	margin: 30px 0;
+	position: relative;
+}
+
+div.single-input input{
+	background-color: #0e1732;
+}
+
+div.single-input label{
+	font-size: 1rem;
+	position: absolute;
+	left: 0;
+	bottom: 5px;
+	color: rgb(150,150,150);
+	cursor: text;
+	transition: 0.5s ease-in-out;
+}
+
+div.single-input .input{
+	width: 100%;
+	padding: 5px;
+	color: white;
+	border: 0;
+	border-bottom: 2px solid rgb(150,150,150);
+	outline: 0;
+	font-size: 1.3rem;
+}
+
+div.single-input .input:focus,
+div.single-input .input:valid{
+	border-bottom: 2px solid #000005;
+	transition: 0.5s ease-in-out;
+}
+
+div.single-input .input:focus ~ label,
+div.single-input .input:valid ~ label{
+	transform: translateY(-24px);
+    font-size: 12px;
+}
+
+ /*Chrome autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #0e1732 inset !important;
+    -webkit-text-fill-color: white;
+}
+
+button{
+	width: 8.0rem;
+	height: 2.5rem;
+	background-color: #000005;
+	box-shadow: none;
+	color: white;
+	border-radius: 5px;
+	border: 0;
+	transform: scale(0.9);
+}
+h1.title{
+	width: 104px!important;
+	border-bottom: 2px solid rgb(150,150,150)!important;
+	color: rgb(150,150,150)!important;
+}
+.button-login{
+	text-align: end;
+	margin-top: 2.8rem;
+}
+button:hover{
+	transform: scale(1.0);
+	box-shadow: 0 0 5px	#000005, 0 0 25px #050814, 0 0  50px #0a0f23;
+}

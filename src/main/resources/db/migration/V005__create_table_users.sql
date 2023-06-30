@@ -4,4 +4,4 @@ create table users(
     password varchar(50) not null
 )engine=InnoDB default charset=utf8mb4;
 
-insert into users (email,password) values ("test@gmail.com","dGVzdGVuY29kZTY0");
+insert into users (email,password) values ("admin@admin","YWRtaW4=");
