@@ -8,7 +8,6 @@ import com.coralsoft.domain.repository.UserRepository;
 import com.coralsoft.useCase.UserUseCase;
 
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet(urlPatterns = {"/ServletLogin","/ServletLogin/index.jsp"})
+@WebServlet(urlPatterns = {"/ServletLogin","/adm/ServletLogin"})
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -29,6 +28,15 @@ public class ServletLogin extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String acao = (String) request.getParameter("acao");
+
+		if(acao != null && !acao.isEmpty() && acao.contentEquals("logout")) {
+			request.getSession().invalidate();
+			RequestDispatcher redirect = request.getRequestDispatcher("index.jsp");
+			redirect.forward(request, response);
+		}else {
+			doPost(request, response);
+		}
 	}
 
 	@Override
@@ -64,7 +72,7 @@ public class ServletLogin extends HttpServlet {
 			
 		}else {
 			request.setAttribute("msg", "Negado");
-			RequestDispatcher redirect = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher redirect = request.getRequestDispatcher("/index.jsp");
 			redirect.forward(request, response);
 		}
 	}

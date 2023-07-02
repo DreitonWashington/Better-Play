@@ -27,7 +27,6 @@ body{
   width: 100%;
   height: 1px;
   background: linear-gradient(to right, rgba(55, 65, 81, 1) 0%, rgba(231, 178, 40, 1) 50%, rgba(55, 65, 81, 1) 100%);
-
 }
 header > h1{
 	font-size: 20px;
@@ -51,7 +50,7 @@ ul{
 li{
 	list-style: none;
 }
-button{
+.btn{	
 	width: 283px;
 	height: 36px; 
 	border-radius: 10px;
@@ -62,8 +61,26 @@ button{
 	margin-bottom: 4px;
 	cursor: pointer;
 	font-weight: 600;
+	padding-left: 9px;
+	width: 274px;
 }
-button:hover{
+a > div{
+    display: inline-flex;
+    align-items: center;
+    margin: auto 0;
+}
+li > button{
+	display: flex;
+}
+.svg-config-vid{
+	margin-left: 60px!important;
+	align-self: center;
+}
+ul{
+   font-size: .875rem;
+   line-height: 1.25rem;
+}
+.btn:hover{
 	background-color: rgb(55 65 81);
 }
 .active{
@@ -125,7 +142,6 @@ main > div{
 }
 .photo{
 	width: 40px;
-    background-color: red;
     height: 40px;
     border-radius: 69px;
 }
@@ -141,13 +157,23 @@ div.photo > span{
     border-radius: unset;
     background-color: unset;
     border: unset;
-    color: unset;
+    color: #D1D5DB;
     text-align: unset;
     margin-bottom: unset;
     cursor: pointer;
     font-weight: unset;
+    text-decoration: none;
+    font-size: 12px;
 }
 .btn-logout:hover{
 	color: #f59e0b;
 	background-color: unset;
+}
+header > div {
+	padding: 12px;
+    text-align: -webkit-right;
+    padding-right: 32px;
+}
+header > div:hover{
+	cursor: pointer;
 }

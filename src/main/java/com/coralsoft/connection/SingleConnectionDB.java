@@ -27,6 +27,7 @@ public class SingleConnectionDB {
 			if(connection == null) {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				connection = DriverManager.getConnection(banco, user, password);
+				connection.setAutoCommit(false);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

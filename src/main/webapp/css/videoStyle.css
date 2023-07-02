@@ -1,0 +1,36 @@
+.container-main{
+	width: 100%;
+	height: 100%;
+}
+.title-main{
+	display: flex;
+	width: unset!important;
+	height: unset!important;
+	background-color: unset!important;
+	height: 36px!important;
+	justify-content: space-between;
+}
+.title-main > h1{
+	margin: 0;
+	color: #F3F4F6;
+	font-size: 1.5rem;
+}
+.newVideo{
+	margin-left: auto;
+	color: white;
+	text-align: center;
+	width: 105px;
+	height: 36px;
+	background-color: #d97706;
+	border-radius: 10px;
+	cursor: pointer;
+	border: 0;
+	display: flex;
+	justify-content: center;
+}
+.newVideo:hover{
+	background-color: #f59e0b;
+}
+a{
+	text-decoration: none;
+}

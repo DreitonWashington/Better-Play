@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dashboard Better-Play</title>
-<!--link href="<%=request.getContextPath() %>/css/dashStyle.css" rel="stylesheet"-->
+<title>Videos Better-Play</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashStyle.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/videoStyle.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
@@ -20,8 +20,8 @@
 			<nav>
 				<ul>
 					<li>
-						<a href="<%=request.getContextPath()%>/adm/dashboard.jsp">
-							<div class="active btn">
+						<a href="<%=request.getContextPath() %>/adm/dashboard.jsp">
+							<div class="btn">
 								<div class="content-in-button">
 									<svg class="h-5 w-5 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
 		  							<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -34,8 +34,8 @@
 						</a>
 					</li>
 					<li>
-						<a href="<%=request.getContextPath()%>/adm/video.jsp">
-							<div class="btn">
+						<a>
+							<div class="active btn">
 								<div class="content-in-button">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
  									<path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -60,7 +60,7 @@
 						<ul class="ul-config-video">
 							<li>
 								<a>
-									<div class="btn">
+									<div  class="btn">
 										<div class="content-in-button">
 											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
 										  	<path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
@@ -92,7 +92,8 @@
 										</div>
 										<span>Elenco</span>
 									</div>
-								</a>	
+								</a>
+								
 							</li>
 						</ul>
 					</li>
@@ -108,17 +109,12 @@
 				</div>
 			</header>
 			<main>
-				<h1>Dashboard</h1>
-				<div>
-					<div class="card-perfil">
-						<div class="photo" style="background-image: url('https://ui-avatars.com/api/?name=A&color=FFFFFF&background=111827');background-position: center;
-    						background-size: cover;">
-    					</div>
-    					<div>
-							<span style="align-self: center;padding-left: 10px;">Bem-vindo, ADM</span>
-							<a href="<%=request.getContextPath() %>/ServletLogin?acao=logout" class="btn-logout" >Logout</a>
-    					</div>
-					</div>
+				<div class="title-main">
+					<h1>Vídeos</h1>
+					<a href="<%=request.getContextPath() %>/adm/newVideo.jsp"><div class="newVideo">Criar Vídeo</div></a>
+				</div>
+				<div class="container-main">
+
 				</div>
 			</main>
 		</div>

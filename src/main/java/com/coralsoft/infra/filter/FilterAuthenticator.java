@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns =  "/adm*")
+@WebFilter(urlPatterns =  "/adm/*")
 public class FilterAuthenticator extends HttpFilter implements Filter {
 	private static final long serialVersionUID = 1L;
 
@@ -43,8 +43,8 @@ public class FilterAuthenticator extends HttpFilter implements Filter {
 			
 			String userLogin = (String) session.getAttribute("user");
 			String urlAuthenticator = req.getServletPath();
-			
-			if(userLogin == null && !urlAuthenticator.equalsIgnoreCase("/ServletLogin")) {
+
+			if(userLogin == null && !urlAuthenticator.equalsIgnoreCase("/adm/ServletLogin")) {
 				RequestDispatcher redirect = request.getRequestDispatcher("/index.jsp?url=" + urlAuthenticator);
 				request.setAttribute("msg", "Por favor realize o login!");
 				redirect.forward(request, response);
@@ -52,11 +52,11 @@ public class FilterAuthenticator extends HttpFilter implements Filter {
 				return;
 			}else{
 				chain.doFilter(request, response);
-			}			
+			}
 			connection.commit();
 		}catch(Exception e) {
 			e.printStackTrace();
-			RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher redirecionar = request.getRequestDispatcher("erro.jsp");
 			request.setAttribute("msg", e.getMessage());
 			redirecionar.forward(request, response);
 			try {
