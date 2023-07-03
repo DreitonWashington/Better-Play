@@ -8,6 +8,7 @@ body{
 	display: flex;
 }
 .side-bar{
+	position: fixed; /**/
 	width: 319px;
 	height: 100vh;
 	background-color: #1f2937;
@@ -36,13 +37,19 @@ header > h1{
 	padding-left: 24px;
 }
 header{
+	position: fixed;/**/
 	height: 63px;
 	background-color: #1f2937;
 	width: 100%;
 	border-bottom: 1px solid #374151;
+	max-width: -webkit-fill-available;
+	max-width: -moz-available;
 }
 .content{
-	width: 100vw;
+	padding-left: 320px;/**/
+	width: 100%;
+	max-width: -webkit-fill-available;
+	max-width: -moz-available;
 }
 ul{
 	margin-left: -22px;
@@ -73,6 +80,7 @@ li > button{
 	display: flex;
 }
 .svg-config-vid{
+
 	margin-left: 60px!important;
 	align-self: center;
 }
@@ -112,6 +120,9 @@ nav{
 	height: 11px;
 	margin-left: 65px;
 }
+.rot{
+	transform: rotate(180deg);
+}
 .ul-config-video{
 	padding-left: 23px;
 	height: 0px;
@@ -124,6 +135,7 @@ nav{
     transition: height 0.3s ease-in-out;
 }
 main{
+	margin-top: 2.5rem;
 	padding: 32px;
 }
 main > h1 {
@@ -171,9 +183,32 @@ div.photo > span{
 }
 header > div {
 	padding: 12px;
-    text-align: -webkit-right;
     padding-right: 32px;
+    text-align: -webkit-right;
+    text-align: -moz-right;
 }
 header > div:hover{
 	cursor: pointer;
+}
+
+/* ScrollBar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #424242; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

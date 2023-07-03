@@ -53,11 +53,11 @@
 							<div style="font-size: 12px;">
 								CONFIGURAÇÕES DO VÍDEO
 							</div>
-							<svg x-bind:class="$store.sidebar.groupIsCollapsed(label) || '-rotate-180'" class="svg-config-vid" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+							<svg x-bind:class="$store.sidebar.groupIsCollapsed(label) || '-rotate-180'" class="svg-config-vid rot" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
   								<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
 							</svg>
 						</button>
-						<ul class="ul-config-video">
+						<ul class="ul-config-video-act">
 							<li>
 								<a>
 									<div class="btn">
@@ -126,17 +126,19 @@
 	<script src="${pageContext.request.contextPath}/jq.js"></script>
 	<script>
 		function drop(){
-			let btn = $('.conf')[0];
+			let btn = $('.svg-config-vid')[0];
 			let element = $('ul')[1];
 					
 			switch(element.className){		
 				case "ul-config-video": {
 					element.classList.remove("ul-config-video")
+					btn.classList.add("rot")
 					element.classList.add("ul-config-video-act")
 					break;
 				}
 				case "ul-config-video-act": {
 					element.classList.remove("ul-config-video-act")
+					btn.classList.remove("rot")
 					element.classList.add("ul-config-video")
 					break;
 				}

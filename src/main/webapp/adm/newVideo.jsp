@@ -53,11 +53,11 @@
 							<div style="font-size: 12px;">
 								CONFIGURAÇÕES DO VÍDEO
 							</div>
-							<svg x-bind:class="$store.sidebar.groupIsCollapsed(label) || '-rotate-180'" class="svg-config-vid" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+							<svg x-bind:class="$store.sidebar.groupIsCollapsed(label) || '-rotate-180'" class="svg-config-vid rot" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
   								<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
 							</svg>
 						</button>
-						<ul class="ul-config-video">
+						<ul class="ul-config-video-act">
 							<li>
 								<a>
 									<div  class="btn">
@@ -110,11 +110,36 @@
 			</header>
 			<main>
 				<div class="title-main">
-					<h1>Vídeos</h1>
-					<button>Criar Vídeo</button>
+					<h1>Criar Video</h1>
 				</div>
 				<div class="container-main">
-
+					<form>
+						<div>
+							<h2>Informações do vídeo</h2>
+							<div class="container-form">
+								<div class="group-input">
+									<label for="title">Título</label>
+									<input type="text" name="title" id="title"/>
+								</div>
+								<div class="group-input">
+									<label for="slug">Slug</label>
+									<input type="text" name="slug" id="slug"/>
+								</div>
+								<div class="group-textarea">
+									<label for="descricao">Descrição</label>
+									<textarea  rows="6" cols="50" name="descricao" id="descricao"></textarea>
+								</div>
+								<div class="group-input n">
+									<label for="anoLancamento">Ano de Lançamento</label>
+									<input type="number" name="anoLancamento" id="anoLancamento"/>
+								</div>
+								<div class="group-input n">
+									<label for="duracao">Duração</label>
+									<input type="number" name="duracao" id="duracao"/>
+								</div>
+							</div>						
+						</div>
+					</form>
 				</div>
 			</main>
 		</div>
@@ -122,17 +147,19 @@
 	<script src="${pageContext.request.contextPath}/jq.js"></script>
 	<script>
 		function drop(){
-			let btn = $('.conf')[0];
+			let btn = $('.svg-config-vid')[0];
 			let element = $('ul')[1];
 					
 			switch(element.className){		
 				case "ul-config-video": {
 					element.classList.remove("ul-config-video")
+					btn.classList.add("rot")
 					element.classList.add("ul-config-video-act")
 					break;
 				}
 				case "ul-config-video-act": {
 					element.classList.remove("ul-config-video-act")
+					btn.classList.remove("rot")
 					element.classList.add("ul-config-video")
 					break;
 				}
