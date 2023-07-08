@@ -13,4 +13,14 @@
     <filter-name>FilterAuthenticator</filter-name>
     <url-pattern>/FilterAuthenticator</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletVideo</display-name>
+    <servlet-name>ServletVideo</servlet-name>
+    <servlet-class>com.coralsoft.infra.web.ServletVideo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletVideo</servlet-name>
+    <url-pattern>/ServletVideo</url-pattern>
+  </servlet-mapping>
 </web-app>

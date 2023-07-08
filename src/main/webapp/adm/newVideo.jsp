@@ -113,7 +113,8 @@
 					<h1>Criar Video</h1>
 				</div>
 				<div class="container-main">
-					<form>
+					<form action="<%=request.getContextPath() %>/ServletVideo" id="form">
+						<input type="hidden" name="act" id="act" value=""/>
 						<div>
 							<h2>Informações do vídeo</h2>
 							<div class="container-form">
@@ -133,9 +134,37 @@
 									<label for="anoLancamento">Ano de Lançamento</label>
 									<input type="number" name="anoLancamento" id="anoLancamento"/>
 								</div>
-								<div class="group-input n">
+								<div class="group-input n" style="margin-left: 19px;">
 									<label for="duracao">Duração</label>
 									<input type="number" name="duracao" id="duracao"/>
+								</div>
+								<div class="group-input n select">
+									<label for="censura">Censura</label>
+									<select name="censura" id="censura" disabled="disabled">
+										
+									</select>
+								</div>
+								<div class="group-input n select" style="margin-left: 19px;">
+									<label for="categoria">Categoria</label>
+									<select name="categoria" id="categoria">
+									
+									</select>
+								</div>
+								<div class="group-input n search select">
+									<label for="genero">Gênero</label>
+									<select name="genero" id="genero" hidden class="classinput-search"></select>
+									<div class="choicesList"></div>
+									<input class="only-input-search" type="search" name="search" placeholder="Selecione uma opção" 
+										onclick="dropGenre()" autocomplete="off"/>
+									<div class="select-choise-list">
+										<div class="choise-list">
+																			
+										</div>
+									</div>
+								</div>
+								<div class="group-input n search" style="margin-left: 19px;">
+									<label for="elenco">Elenco</label>
+									<input type="search" name="elenco" id="elenco" class="classinput-search"/>
 								</div>
 							</div>						
 						</div>
@@ -146,6 +175,30 @@
 	</div>
 	<script src="${pageContext.request.contextPath}/jq.js"></script>
 	<script>
+		function dropGenre(){
+			var element = document.querySelector('.choise-list');
+			var element2 = document.querySelector('.only-input-search');
+			var elements = document.getElementsByClassName('choise-option');
+			
+			searchGenre()
+			
+			if (element.classList.contains("not-hidden")) {
+			  element.classList.remove("not-hidden");
+			} else {
+			  element.classList.add("not-hidden");
+			}
+	
+			document.addEventListener("click", function(event) {
+			  let isTargetMatched = event.target === element2 || event.target === element;
+			  for (let i = 0; i < elements.length; i++) {
+			    isTargetMatched = isTargetMatched || event.target === elements[i];
+			  }
+			  if (!isTargetMatched) {
+			    element.classList.remove("not-hidden");
+			  }
+			});		
+		}
+
 		function drop(){
 			let btn = $('.svg-config-vid')[0];
 			let element = $('ul')[1];
@@ -164,6 +217,31 @@
 					break;
 				}
 			}
+		}
+		
+		function searchGenre(){
+			var urlAction = document.getElementsByTagName('form')[0].action;
+			
+			$.ajax({
+				method: "get",
+				url: urlAction,
+				data: "&act=searchGenre",
+				success: function(response){
+					var json = JSON.parse(response);
+					var dropList = $('.choise-list');
+					if(dropList[0].childElementCount == 0){
+						for(let i = 0 ; i < json.length ; i++){
+							dropList.append("<div class=choise-option onclick=addGenreToList() id="+json[i].id+">"+json[i].name+"</div>");
+						}
+					}
+				}
+			}).fail(function(){
+				alert("Erro")
+			});
+		}
+		
+		function addGenreToList($event){
+			console.log(event.target)
 		}
 	</script>
 </body>

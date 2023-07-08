@@ -101,3 +101,63 @@ textarea:focus{
 .n > input{
 	width: 517px;
 }
+
+label + select,search{
+	margin-top: 8px;
+}
+select,search{
+	height: 39.6px;
+	background-color: #374151;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	padding: 8px;
+	font-size: 1rem;
+	color: white
+}
+select,search:focus{
+	outline: 2px solid #f59e0b;	
+}
+.select{
+	width: 534.6px;
+}
+.select-choise-list{
+	margin-top: 75px;
+	background-color: #374151;
+	color: white;
+	border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+}
+.classinput-search{
+	width: 534.6px!important;
+	height: 39.6px;
+}
+.choise-list{
+	position: relative;
+	height: 0px;
+	overflow: hidden;
+}
+.not-hidden{
+	height: unset;
+	overflow: unset;
+}
+.choise-option{
+	display: flex;
+	width: 524.6px!important;
+	height: 39.6px;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    padding-left: 10px;
+}
+.choise-option:hover{
+	background-color: #d97706;
+	color: white;
+}
+
+/*Inputs with select*/
+.only-input-search{
+	width: 534.6px!important;
+	margin-top: 8px;
+	height: 39.6px;
+}
