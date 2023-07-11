@@ -152,15 +152,18 @@
 								</div>
 								<div class="group-input n search select">
 									<label for="genero">Gênero</label>
-									<select name="genero" id="genero" hidden class="classinput-search"></select>
-									<div class="choicesList"></div>
-									<input class="only-input-search" type="search" name="search" placeholder="Selecione uma opção" 
-										onclick="dropGenre()" autocomplete="off"/>
-									<div class="select-choise-list">
-										<div class="choise-list">
-																			
-										</div>
+									<div class="only-input-search div-op-genre" onclick="dropGenre()" >
+										<select name="genero" id="genero" hidden class="classinput-search"></select>
+										<div class="choicesList"></div>
+<!-- 										<input type="search" name="search" id="searchInp" placeholder="Selecione uma opção"  -->
+<!-- 											onclick="dropGenre()" autocomplete="off"/> -->
+									Selecione uma opção
 									</div>
+										<div class="select-choise-list">
+											<div class="choise-list">
+																				
+											</div>
+										</div>
 								</div>
 								<div class="group-input n search" style="margin-left: 19px;">
 									<label for="elenco">Elenco</label>
@@ -175,6 +178,7 @@
 	</div>
 	<script src="${pageContext.request.contextPath}/jq.js"></script>
 	<script>
+
 		function dropGenre(){
 			var element = document.querySelector('.choise-list');
 			var element2 = document.querySelector('.only-input-search');
@@ -240,9 +244,42 @@
 			});
 		}
 		
-		function addGenreToList($event){
-			console.log(event.target)
+		function addGenreToList($event) {
+			var element = $("#genero");
+			var elementChildren = $("#genero")[0].children;
+			var elementInFocus = event.target;
+			var isValuePresent = false;
+			var choicesList = $(".choicesList")[0]
+			var divopgenre = $(".div-op-genre")[0]
+			
+			for (let i = 0; i < elementChildren.length; i++) {
+			  if (elementInFocus.id === elementChildren[i].value) {
+			    isValuePresent = true;
+			    break;
+			  }
+			}
+
+			if (!isValuePresent) {
+			  element.append("<option value=" + event.target.id + ">" + event.target.innerText + "</option>");
+			  renderList(event.target)
+			}
+			
+			if(choicesList.children.length > 0){
+				divopgenre.classList.add("tbt")
+			}
 		}
+		
+		function renderList($event){
+			var element = $('.choicesList')
+			var eventId = event.target.id 
+			element.append("<div class=chosen id="+event.target.id+">"+event.target.innerText+"<div class=btn-remove onclick=removeGenreRenderList("+eventId+")></div></div>")
+		}
+		
+		function removeGenreRenderList(numb){
+			console.log(numb)
+		}
+			
+		
 	</script>
 </body>
 </html>
