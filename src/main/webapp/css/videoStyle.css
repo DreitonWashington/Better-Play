@@ -45,10 +45,14 @@ h2{
 form{
 	margin-top: 1.5rem;
 }
-form > div{
+.content-video{
 	overflow: auto;
 	border: 1px solid #4b5563;
 	border-radius: 0.75rem;	
+	background-color: #1f2937;
+}
+main > div{
+	background-color: unset;
 }
 .group-input{
 	display: flex;
@@ -114,7 +118,10 @@ select,search,.div-op-genre{
 	font-size: 1rem;
 	color: white
 }
-select,search:focus{
+search:focus{
+	outline: 2px solid #f59e0b;	
+}
+select:focus{
 	outline: 2px solid #f59e0b;	
 }
 .select{
@@ -190,15 +197,86 @@ select,search:focus{
 	cursor: pointer;
 }
 .div-op-genre{
-	padding: unset;
-	display: flex;
-	color: #656c7a;
-	text-align: center;
-	align-items: center;
+	width: 524px!important;
+	height: 38px!important;
+	padding-left: 9px;
+    padding-bottom: unset;
+    padding-top: unset;
+    padding-right: unset;
+    display: flex;
+    color: #656c7a;
+    text-align: center;
+    align-items: center;
 }	
 .tbt{
 	display: table;
 }
 .div-op-genre:hover{
 	cursor: pointer;
+}
+.borderFieldSpecial{
+	outline: 2px solid #f59e0b;	
+}
+.content-img, .content-vid{
+	background-color: transparent;
+	margin-top: 22px;
+}
+
+input[type="file"] {
+    display: none;
+}
+.inputFileTitle{
+	font-size: 0.85rem;
+	margin-bottom: 0;
+	color: #d1d5db;
+}
+.inputFile {
+	color: #d1d5db;
+    text-align: center;
+    display: flex;
+    margin-top: 5px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height: 38px;
+    border-radius: 5px;
+    background-color: #374151;
+}
+.divInputFile{
+	margin-bottom: 20px;
+}
+fieldset{
+    border-radius: 0.75rem;
+    border: 1px solid #4b5563;
+}
+legend{
+	color: #d1d5db;
+}
+.btn-vid{
+	width: auto;
+	background-color: #1f2937;
+	color: white;
+	border: 1px solid #4b5563;
+	border-radius: 5px;
+	height: 36px;
+	padding: 4px 16px;
+	display: flex;
+	align-items: center;
+}
+.btn-vid:hover{
+	border: 1px solid #d97706;
+	cursor: pointer;
+	background-color: #374151;
+}
+
+.btn-primary{
+	background-color: #d97706!important;
+}
+.btn-primary:hover{
+	background-color: #f59e0b;
+}
+.btn-list{
+	display: flex;
+    margin: 15px 0px 0px 5px;
+    gap: 1rem;
 }
