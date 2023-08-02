@@ -113,7 +113,7 @@
 					<h1>Criar Video</h1>
 				</div>
 				<div class="container-main">
-					<form enctype="multipart/form-data" action="${pageContext.request.contextPath}/adm/newVideo" method="POST" id="form">
+					<form enctype="multipart/form-data" action="${pageContext.request.contextPath}/adm/newVideo" method="post" id="form">
 						<input type="hidden" name="act" id="act" value=""/>
 						<div class="content-video">
 							<h2>Informações do vídeo</h2>
@@ -158,13 +158,14 @@
 								</div>
 								<div class="group-input n search select">
 									<label for="genero">Gênero</label>
-									<div class="only-input-search div-op-genre" onclick="dropGenre()" >
-										<select name="genero" id="genero" hidden class="classinput-search"></select>
+									<div class="only-input-search div-op-genre" onclick="dropGenre()">
+										<select name="gener" id="genero" hidden class="classinput-search"></select>
 										<div class="choicesList"></div>
 <!-- 										<input type="search" name="search" id="searchInp" placeholder="Selecione uma opção"  -->
 <!-- 											onclick="dropGenre()" autocomplete="off"/> -->
 									Selecione uma opção
 									</div>
+										<input name="valuesGenre" id="valuesGenre" hidden="hidden"/>
 										<div class="select-choise-list">
 											<div class="choise-list">
 																				
@@ -184,20 +185,24 @@
 								
 								<div class="divInputFile">
 									<h3 class="inputFileTitle">Banner</h3>
-									<label for="banner" class="inputFile">Arraste o arquivo ou Clique aqui</label>
-									<input type="file" id="banner"/>
+<!-- 									<label for="banner" class="inputFile">Arraste o arquivo ou Clique aqui</label> -->
+									<div class="inputFile inputFileBanner" onclick="openInput()">
+									<input type="file" name="banner" id="banner" hidden="hidden"/>
+										<img src="" id="imgBanner" class="inputImgFile"/>
+										Arraste o arquivo ou Clique aqui
+									</div>
 								</div>
 								
 								<div class="divInputFile">
 									<h3 class="inputFileTitle">Thumb</h3>
 									<label for="thumb" class="inputFile">Arraste o arquivo ou Clique aqui</label>
-									<input type="file" id="thumb"/>
+									<input type="file" name="thumb" id="thumb"/>
 								</div>
 								
 								<div class="divInputFile">
 									<h3 class="inputFileTitle">Half Thumb</h3>
 									<label for="halfthumb" class="inputFile">Arraste o arquivo ou Clique aqui</label>
-									<input type="file" id="halfthumb"/>
+									<input type="file" name="halfThumb" id="halfthumb"/>
 								</div>
 							</fieldset>						
 						</div>
@@ -208,12 +213,12 @@
 								<div class="divInputFile">
 									<h3 class="inputFileTitle">Media</h3>
 									<label for="media" class="inputFile">Arraste o arquivo ou Clique aqui</label>
-									<input type="file" id="media"/>
+									<input type="file" name="media" id="media"/>
 								</div>
 							</fieldset>
 						</div>
 						<div class="btn-list">
-							<button class="btn-vid btn-primary">Criar</button>
+							<button class="btn-vid btn-primary" onclick="getValues()">Criar</button>
 							<button class="btn-vid">Criar e criar novo</button>
 							<button class="btn-vid">Cancelar</button>
 						</div>
@@ -225,24 +230,29 @@
 	<script src="${pageContext.request.contextPath}/jq.js"></script>
 	<script>
 	
-	$("#btnsend").click(testVideo);
-
-	function testVideo() {
-	    var urlAction = $('#form2')[0].action;
-	    var form = new FormData();
-	    var file = $('#file')[0].files[0];
-	    form.append('file', file);
-	    
-	    $.ajax({
-	        method: "POST",
-	        url: urlAction,
-	        data: form,
-	        contentType: false,
-	        processData: false,
-	        success: function(data) {
-	            console.log(data);
-	        }
-	    });
+		const imgInput = document.getElementById('banner')
+		const imgBanner = document.getElementById('imgBanner')
+		imgInput.addEventListener('change', function () {
+  		const file = imgInput.files[0];
+  		if (file) {
+    		const reader = new FileReader();
+    		reader.onload = function (e) {
+      			imgBanner.src = e.target.result;
+      			imgBanner.style.display = 'block';
+    			};
+    		reader.readAsDataURL(file);
+  			}
+		});
+		
+	function openInput(){
+		changeTxtByImg()
+		document.getElementById('banner').click()
+	}
+	
+	function changeTxtByImg(){
+		var element = $('.inputFileBanner')[0]
+		element.innerText=""
+		element.classList.add("inputMediaHeight")
 	}
 	
 	function dropGenre() {
@@ -362,7 +372,16 @@
 		})
 	}
 
+	function getValues(){
+		var element = document.getElementsByName('gener')[0].children;
+		let values = [];
+		for(let i = 0 ; i < element.length ; i++){
+			values.push(element[i].value);
+		}
 		
+		var genreString = values.join(',');
+		document.getElementById('valuesGenre').value = genreString;
+	}	
 	</script>
 </body>
 </html>

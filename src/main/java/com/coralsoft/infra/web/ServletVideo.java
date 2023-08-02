@@ -3,6 +3,9 @@ package com.coralsoft.infra.web;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,20 +73,72 @@ public class ServletVideo extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String applicationPath = request.getServletContext().getRealPath("/video");
-	    String uploadFilePath = applicationPath + File.separator;
-	    String fileName = null;
-	    for(Part part : request.getParts()) {
-	    	fileName = getFileName(part);
-	    }
-	    System.out.println(fileName);
-//	    System.out.println(uploadFilePath);
-//	    	for (Part part : request.getParts()) {
-//	            fileName = getFileName(part);
-//	            part.write(uploadFilePath + File.separator + fileName);
-//	        }
-	    }
+		String title = request.getParameter("title");
+		String slug = request.getParameter("slug");
+		String description = request.getParameter("descricao");
+		String yearLaunched = request.getParameter("anoLancamento");
+		String duration = request.getParameter("duracao");
+		String censure = request.getParameter("censura");
+		String category = request.getParameter("categoria");
+		String genre = request.getParameter("valuesGenre");
+		String[] genreIds = genre.split(",");
+		
+		//String applicationPath = request.getServletContext().getRealPath("/video/");
+		String applicationPath = "C:\\Users\\dreit\\OneDrive\\Área de Trabalho\\workspace-eclipse-ee\\better-play\\src\\main\\webapp\\video\\";
+		String pathNewMediaFolder = applicationPath+title;
+		String pathNewMediaInFolder = applicationPath+title+"\\";
+		
+		System.out.println(createFolder(pathNewMediaFolder, pathNewMediaInFolder));
+
+//		Part banner = request.getPart("banner");
+//		System.out.println(saveMediaImage(banner, pathNewMediaInFolder + "\\banner"));
+//		
+//		Part thumb = request.getPart("thumb");
+//		System.out.println(saveMediaImage(thumb, pathNewMediaInFolder + "\\thumbFolder"));
+//		
+//		Part halfThumb = request.getPart("halfThumb");
+//		System.out.println(saveMediaImage(halfThumb, pathNewMediaInFolder + "\\halfThumbFolder"));
+		
+		System.out.println(saveMedia(request, pathNewMediaInFolder));
+		
+
+	}
 	
+	private String createFolder(String pathNewMediaFolder, String pathNewMediaInFolder) {
+		Path path = Paths.get(pathNewMediaInFolder);
+		if(Files.exists(path)) {
+			return "Já existe esse filme...";
+		}else {
+			boolean pasta = new File(pathNewMediaFolder).mkdir();
+			var bannerFolder = new File(pathNewMediaFolder+"\\banner").mkdirs();
+			var thumbFolder = new File(pathNewMediaFolder+"\\thumbFolder").mkdirs();
+			var thumbHalfFolder = new File(pathNewMediaFolder+"\\halfThumbFolder").mkdirs();
+			return "Criado...";
+		}			
+	}
+	
+	private String saveMediaImage(Part part, String pathNewMediaInFolder) {
+		String nomeArquivo = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+	    Path caminhoCompleto = Paths.get(pathNewMediaInFolder, nomeArquivo);
+	    
+	    try {
+            Files.copy(part.getInputStream(), caminhoCompleto);
+            return "Imagem salva com sucesso em: " + caminhoCompleto;
+        } catch (IOException e) {
+            return "Erro ao salvar a imagem: " + e.getMessage();
+        }
+	}
+	
+	private String saveMedia(HttpServletRequest request, String pathNewMediaInFolder) throws IOException, ServletException {
+		Part filePart = request.getPart("media");
+	    String fileName = filePart.getSubmittedFileName();
+	    for (Part parts : request.getParts()) {
+	      parts.write(pathNewMediaInFolder + fileName);
+	    }
+	    return "The file uploaded sucessfully." + Paths.get(pathNewMediaInFolder + fileName);
+	}
+		
+		
 	private String getFileName(Part part) {
 		String contentDisp = part.getHeader("content-disposition");
 	    System.out.println("content-disposition header= "+contentDisp);

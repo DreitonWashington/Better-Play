@@ -280,3 +280,11 @@ legend{
     margin: 15px 0px 0px 5px;
     gap: 1rem;
 }
+.inputFileBanner{display: block;}
+.inputImgFile{
+	height: 256px;
+	margin: 0 auto;
+}
+.inputMediaHeight{
+	height: 256px;
+}
